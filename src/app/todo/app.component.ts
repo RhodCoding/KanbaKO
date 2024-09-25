@@ -10,7 +10,6 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,11 +18,12 @@ import {
   imports: [CommonModule, FormsModule, DragDropModule],
 })
 export class AppComponent {
-  todo = ['Task 1', 'Task 2', 'Task 3'];
-  inProgress = ['Task 4'];
-  done = ['Task 5'];
-  newTask: string = '';
+  todo: string[] = [];         // Empty To do list initially
+  inProgress: string[] = [];   // Empty In Progress list initially
+  done: string[] = [];         // Empty Done list initially
+  newTask: string = '';        // Variable to hold the new task input
 
+  // Handles dropping and reordering tasks
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -37,10 +37,11 @@ export class AppComponent {
     }
   }
 
+  // Adds a new task to the To do list
   addTask() {
     if (this.newTask.trim()) {
-      this.todo.push(this.newTask.trim());
-      this.newTask = '';
+      this.todo.push(this.newTask.trim());  // Push new task to To do list
+      this.newTask = '';  // Clear the input after adding the task
     }
   }
 }
