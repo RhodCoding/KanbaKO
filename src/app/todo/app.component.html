@@ -13,10 +13,13 @@
       cdkDropList
       #todoList="cdkDropList"
       [cdkDropListData]="todo"
-      [cdkDropListConnectedTo]="[doneList,inProgressList]"
+      [cdkDropListConnectedTo]="[inProgressList, doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let item of todo" class="example-box" cdkDrag>{{item}}</div>
+      <div *ngFor="let item of todo; let i = index" class="example-box" cdkDrag>
+        {{ item }}
+        <button (click)="deleteTask(todo, i)" class="delete">DELETE</button> <!-- Delete button for To do tasks -->
+      </div>
     </div>
   </div>
 
@@ -27,10 +30,13 @@
       cdkDropList
       #inProgressList="cdkDropList"
       [cdkDropListData]="inProgress"
-      [cdkDropListConnectedTo]="[todoList,doneList]"
+      [cdkDropListConnectedTo]="[todoList, doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let item of inProgress" class="example-box" cdkDrag>{{item}}</div>
+      <div *ngFor="let item of inProgress; let i = index" class="example-box" cdkDrag>
+        {{ item }}
+        <button (click)="deleteTask(inProgress, i)" class="delete">DELETE</button> <!-- Delete button for In Progress tasks -->
+      </div>
     </div>
   </div>
 
@@ -41,10 +47,13 @@
       cdkDropList
       #doneList="cdkDropList"
       [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="[todoList,inProgressList]"
+      [cdkDropListConnectedTo]="[todoList, inProgressList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let item of done" class="example-box" cdkDrag>{{item}}</div>
+      <div *ngFor="let item of done; let i = index" class="example-box" cdkDrag>
+        {{ item }}
+        <button (click)="deleteTask(done, i)" class="delete">DELETE</button> <!-- Delete button for Done tasks -->
+      </div>
     </div>
   </div>
 

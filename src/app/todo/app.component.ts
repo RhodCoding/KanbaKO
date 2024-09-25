@@ -6,8 +6,6 @@ import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
-  CdkDrag,
-  CdkDropList,
 } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -18,12 +16,11 @@ import {
   imports: [CommonModule, FormsModule, DragDropModule],
 })
 export class AppComponent {
-  todo: string[] = [];         // Empty To do list initially
-  inProgress: string[] = [];   // Empty In Progress list initially
-  done: string[] = [];         // Empty Done list initially
-  newTask: string = '';        // Variable to hold the new task input
+  todo: string[] = [];
+  inProgress: string[] = [];
+  done: string[] = [];
+  newTask: string = '';
 
-  // Handles dropping and reordering tasks
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -37,11 +34,16 @@ export class AppComponent {
     }
   }
 
-  // Adds a new task to the To do list
+  // Adds a new task to the "To do" list
   addTask() {
     if (this.newTask.trim()) {
-      this.todo.push(this.newTask.trim());  // Push new task to To do list
-      this.newTask = '';  // Clear the input after adding the task
+      this.todo.push(this.newTask.trim());
+      this.newTask = '';
     }
+  }
+
+  // Deletes a task from a list based on the index
+  deleteTask(list: string[], index: number) {
+    list.splice(index, 1);  // Remove the task at the specified index
   }
 }
