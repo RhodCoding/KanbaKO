@@ -2,7 +2,9 @@
 
   <!-- To Do Column -->
   <div class="box-container">
-    <h2>To do</h2>
+    <div class="title">
+     <h2>To do</h2>
+    </div>
     <!-- Input field for adding new task -->
     <div class="add-task">
       <input [(ngModel)]="newTask" placeholder="Enter a new task" />
@@ -17,15 +19,20 @@
       class="example-list"
       (cdkDropListDropped)="drop($event)">
       <div *ngFor="let item of todo; let i = index" class="example-box" cdkDrag>
-        {{ item }}
+        {{ item }} 
+      <div class="date-delete">
         <button (click)="deleteTask(todo, i)" class="delete">DELETE</button> <!-- Delete button for To do tasks -->
+        <p>{{ finalString }}</p>
+      </div>
       </div>
     </div>
   </div>
 
   <!-- In Progress Column -->
   <div class="box-container">
-    <h2>In Progress</h2>
+    <div class="title">
+      <h2>In Progress</h2>
+     </div>
     <div
       cdkDropList
       #inProgressList="cdkDropList"
@@ -35,14 +42,19 @@
       (cdkDropListDropped)="drop($event)">
       <div *ngFor="let item of inProgress; let i = index" class="example-box" cdkDrag>
         {{ item }}
-        <button (click)="deleteTask(inProgress, i)" class="delete">DELETE</button> <!-- Delete button for In Progress tasks -->
+        <div class="date-delete">
+          <button (click)="deleteTask(todo, i)" class="delete">DELETE</button> <!-- Delete button for To do tasks -->
+          <p>{{ finalString }}</p>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Done Column -->
   <div class="box-container">
-    <h2>Done</h2>
+    <div class="title">
+      <h2>Done</h2>
+     </div>
     <div
       cdkDropList
       #doneList="cdkDropList"
@@ -52,7 +64,10 @@
       (cdkDropListDropped)="drop($event)">
       <div *ngFor="let item of done; let i = index" class="example-box" cdkDrag>
         {{ item }}
-        <button (click)="deleteTask(done, i)" class="delete">DELETE</button> <!-- Delete button for Done tasks -->
+        <div class="date-delete">
+          <button (click)="deleteTask(todo, i)" class="delete">DELETE</button> <!-- Delete button for To do tasks -->
+          <p>{{ finalString }}</p>
+        </div>
       </div>
     </div>
   </div>

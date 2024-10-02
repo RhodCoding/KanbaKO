@@ -20,6 +20,12 @@ export class AppComponent {
   inProgress: string[] = [];
   done: string[] = [];
   newTask: string = '';
+  finalString: string;  // Holds the formatted date or any string
+
+  constructor() {
+    let currentDate = new Date();
+    this.finalString = currentDate.toLocaleDateString();  // Example: '10/1/2024'
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
