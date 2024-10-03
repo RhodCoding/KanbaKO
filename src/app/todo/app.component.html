@@ -3,13 +3,15 @@
   <!-- To Do Column -->
   <div class="box-container">
     <div class="title">
-     <h2>To do</h2>
+      <h2>To do</h2>
     </div>
+
     <!-- Input field for adding new task -->
     <div class="add-task">
       <input [(ngModel)]="newTask" placeholder="Enter a new task" />
       <button (click)="addTask()">+</button>
     </div>
+
     <!-- List of tasks in To do column -->
     <div
       cdkDropList
@@ -18,12 +20,25 @@
       [cdkDropListConnectedTo]="[inProgressList, doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let item of todo; let i = index" class="example-box" cdkDrag>
-        {{ item }} 
-      <div class="date-delete">
-        <button (click)="deleteTask(todo, i)" class="delete">DELETE</button> <!-- Delete button for To do tasks -->
-        <p>{{ finalString }}</p>
-      </div>
+      
+      <div *ngFor="let task of todo; let i = index" class="example-box" cdkDrag>
+
+        <!-- Edit mode -->
+        <div *ngIf="!task.isEditing">
+          <button (click)="editTask(task)" class="edit">EDIT</button>
+          {{ task.name }}
+          <div class="date-delete">
+            <p>{{ finalString }}</p>
+            <button (click)="deleteTask(todo, i)" class="delete">DELETE</button>
+          </div>
+        </div>
+
+        <!-- Edit input field -->
+        <div *ngIf="task.isEditing">
+          <input [(ngModel)]="task.name" placeholder="Edit task" />
+          <button (click)="saveTask(task, task.name)">SAVE</button>
+          <button (click)="cancelEdit(task)">CANCEL</button>
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +47,7 @@
   <div class="box-container">
     <div class="title">
       <h2>In Progress</h2>
-     </div>
+    </div>
     <div
       cdkDropList
       #inProgressList="cdkDropList"
@@ -40,11 +55,24 @@
       [cdkDropListConnectedTo]="[todoList, doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let item of inProgress; let i = index" class="example-box" cdkDrag>
-        {{ item }}
-        <div class="date-delete">
-          <button (click)="deleteTask(todo, i)" class="delete">DELETE</button> <!-- Delete button for To do tasks -->
-          <p>{{ finalString }}</p>
+      
+      <div *ngFor="let task of inProgress; let i = index" class="example-box" cdkDrag>
+
+        <!-- Edit mode -->
+        <div *ngIf="!task.isEditing">
+          <button (click)="editTask(task)" class="edit">EDIT</button>
+          {{ task.name }}
+          <div class="date-delete">
+            <p>{{ finalString }}</p>
+            <button (click)="deleteTask(inProgress, i)" class="delete">DELETE</button>
+          </div>
+        </div>
+
+        <!-- Edit input field -->
+        <div *ngIf="task.isEditing">
+          <input [(ngModel)]="task.name" placeholder="Edit task" />
+          <button (click)="saveTask(task, task.name)">SAVE</button>
+          <button (click)="cancelEdit(task)">CANCEL</button>
         </div>
       </div>
     </div>
@@ -54,7 +82,7 @@
   <div class="box-container">
     <div class="title">
       <h2>Done</h2>
-     </div>
+    </div>
     <div
       cdkDropList
       #doneList="cdkDropList"
@@ -62,11 +90,24 @@
       [cdkDropListConnectedTo]="[todoList, inProgressList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let item of done; let i = index" class="example-box" cdkDrag>
-        {{ item }}
-        <div class="date-delete">
-          <button (click)="deleteTask(todo, i)" class="delete">DELETE</button> <!-- Delete button for To do tasks -->
-          <p>{{ finalString }}</p>
+      
+      <div *ngFor="let task of done; let i = index" class="example-box" cdkDrag>
+
+        <!-- Edit mode -->
+        <div *ngIf="!task.isEditing">
+          <button (click)="editTask(task)" class="edit">EDIT</button>
+          {{ task.name }}
+          <div class="date-delete">
+            <p>{{ finalString }}</p>
+            <button (click)="deleteTask(done, i)" class="delete">DELETE</button>
+          </div>
+        </div>
+
+        <!-- Edit input field -->
+        <div *ngIf="task.isEditing">
+          <input [(ngModel)]="task.name" placeholder="Edit task" />
+          <button (click)="saveTask(task, task.name)">SAVE</button>
+          <button (click)="cancelEdit(task)">CANCEL</button>
         </div>
       </div>
     </div>
