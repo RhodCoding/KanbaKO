@@ -25,11 +25,13 @@
 
         <!-- Edit mode -->
         <div *ngIf="!task.isEditing">
-          <button (click)="editTask(task)" class="edit">EDIT</button>
           {{ task.name }}
           <div class="date-delete">
             <p>{{ finalString }}</p>
-            <button (click)="deleteTask(todo, i)" class="delete">DELETE</button>
+            <div class="edit-delete">
+             <button (click)="editTask(task)" class="edit">EDIT</button>
+             <button (click)="deleteTask(todo, i)" class="delete">DELETE</button>
+            </div>
           </div>
         </div>
 
@@ -60,11 +62,13 @@
 
         <!-- Edit mode -->
         <div *ngIf="!task.isEditing">
-          <button (click)="editTask(task)" class="edit">EDIT</button>
           {{ task.name }}
           <div class="date-delete">
             <p>{{ finalString }}</p>
-            <button (click)="deleteTask(inProgress, i)" class="delete">DELETE</button>
+            <div class="edit-delete">
+             <button (click)="editTask(task)" class="edit">EDIT</button>
+             <button (click)="deleteTask(inProgress, i)" class="delete">DELETE</button>
+            </div>
           </div>
         </div>
 
@@ -95,11 +99,13 @@
 
         <!-- Edit mode -->
         <div *ngIf="!task.isEditing">
-          <button (click)="editTask(task)" class="edit">EDIT</button>
           {{ task.name }}
           <div class="date-delete">
             <p>{{ finalString }}</p>
-            <button (click)="deleteTask(done, i)" class="delete">DELETE</button>
+            <div class="edit-delete">
+             <button (click)="editTask(task)" class="edit">EDIT</button>
+             <button (click)="deleteTask(done, i)" class="delete">DELETE</button>
+            </div>
           </div>
         </div>
 

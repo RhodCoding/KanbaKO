@@ -83,10 +83,16 @@ body {
     padding: 15px;
   }
 }
+.edit {
+  color: orange;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
 .delete {
   color: red;
   border: none;
-  background-color: white;
+  background-color: transparent;
   cursor: pointer;
 }
 .title {
@@ -108,4 +114,8 @@ body {
   p {
     color: blue;
   }
+}
+.edit-delete {
+  display: flex;
+  flex-direction: row;
 }
