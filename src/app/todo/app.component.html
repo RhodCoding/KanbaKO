@@ -20,10 +20,10 @@
       [cdkDropListConnectedTo]="[inProgressList, doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      
+
       <div *ngFor="let task of todo; let i = index" class="example-box" cdkDrag>
 
-        <!-- Edit mode -->
+        <!-- View mode -->
         <div *ngIf="!task.isEditing">
           {{ task.name }}
           <div class="date-delete">
@@ -35,9 +35,9 @@
           </div>
         </div>
 
-        <!-- Edit input field -->
+        <!-- Edit mode with textarea -->
         <div *ngIf="task.isEditing">
-          <input [(ngModel)]="task.name" placeholder="Edit task" />
+          <textarea [(ngModel)]="task.name" placeholder="Edit task" rows="2" (input)="adjustTextareaHeight($event)"></textarea>
           <button (click)="saveTask(task, task.name)">SAVE</button>
           <button (click)="cancelEdit(task)">CANCEL</button>
         </div>
@@ -57,10 +57,10 @@
       [cdkDropListConnectedTo]="[todoList, doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      
+
       <div *ngFor="let task of inProgress; let i = index" class="example-box" cdkDrag>
 
-        <!-- Edit mode -->
+        <!-- View mode -->
         <div *ngIf="!task.isEditing">
           {{ task.name }}
           <div class="date-delete">
@@ -72,9 +72,9 @@
           </div>
         </div>
 
-        <!-- Edit input field -->
+        <!-- Edit mode with textarea -->
         <div *ngIf="task.isEditing">
-          <input [(ngModel)]="task.name" placeholder="Edit task" />
+          <textarea [(ngModel)]="task.name" placeholder="Edit task" rows="2" (input)="adjustTextareaHeight($event)"></textarea>
           <button (click)="saveTask(task, task.name)">SAVE</button>
           <button (click)="cancelEdit(task)">CANCEL</button>
         </div>
@@ -94,10 +94,10 @@
       [cdkDropListConnectedTo]="[todoList, inProgressList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      
+
       <div *ngFor="let task of done; let i = index" class="example-box" cdkDrag>
 
-        <!-- Edit mode -->
+        <!-- View mode -->
         <div *ngIf="!task.isEditing">
           {{ task.name }}
           <div class="date-delete">
@@ -109,9 +109,9 @@
           </div>
         </div>
 
-        <!-- Edit input field -->
+        <!-- Edit mode with textarea -->
         <div *ngIf="task.isEditing">
-          <input [(ngModel)]="task.name" placeholder="Edit task" />
+          <textarea [(ngModel)]="task.name" placeholder="Edit task" rows="2" (input)="adjustTextareaHeight($event)"></textarea>
           <button (click)="saveTask(task, task.name)">SAVE</button>
           <button (click)="cancelEdit(task)">CANCEL</button>
         </div>

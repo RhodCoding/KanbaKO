@@ -74,6 +74,7 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+  text-align: left;
 
   input {
     padding: 10px;
@@ -118,4 +119,15 @@ body {
 .edit-delete {
   display: flex;
   flex-direction: row;
+}
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  resize: vertical; /* Allows the user to manually resize the height */
+  min-height: 80px; /* Ensures there's enough space for short tasks */
+  max-height: 150px; /* Set a max-height to keep it from growing too large */
+  overflow-y: auto; /* Add a scroll bar if the content exceeds max-height */
 }

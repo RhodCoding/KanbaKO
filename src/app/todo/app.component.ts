@@ -68,4 +68,11 @@ export class AppComponent {
   cancelEdit(task: { name: string; isEditing: boolean }) {
     task.isEditing = false;
   }
+
+  // Adjust the height of the textarea dynamically
+  adjustTextareaHeight(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto'; // Reset the height
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set height based on content
+  }
 }
