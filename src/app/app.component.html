@@ -1,5 +1,4 @@
 <div class="whole-container">
-
   <!-- To Do Column -->
   <div class="box-container">
     <div class="title">
@@ -8,7 +7,8 @@
 
     <!-- Input field for adding new task -->
     <div class="add-task">
-      <input [(ngModel)]="newTask" placeholder="Enter a new task" />
+      <input [(ngModel)]="newTask.name" placeholder="Enter a new task" />
+      <input [(ngModel)]="newTask.dueDate" type="date" placeholder="Due date" />
       <button (click)="addTask()">+</button>
     </div>
 
@@ -27,10 +27,10 @@
         <div *ngIf="!task.isEditing">
           {{ task.name }}
           <div class="date-delete">
-            <p>{{ finalString }}</p>
+            <p *ngIf="task.dueDate">Due Date: {{ task.dueDate | date }}</p>
             <div class="edit-delete">
-             <button (click)="editTask(task)" class="edit">EDIT</button>
-             <button (click)="deleteTask(todo, i)" class="delete">DELETE</button>
+              <button (click)="editTask(task)" class="edit">EDIT</button>
+              <button (click)="deleteTask(todo, i)" class="delete">DELETE</button>
             </div>
           </div>
         </div>
@@ -38,6 +38,7 @@
         <!-- Edit mode with textarea -->
         <div *ngIf="task.isEditing">
           <textarea [(ngModel)]="task.name" placeholder="Edit task" rows="2" (input)="adjustTextareaHeight($event)"></textarea>
+          <input [(ngModel)]="task.dueDate" type="date" placeholder="Due date" />
           <button (click)="saveTask(task, task.name)">SAVE</button>
           <button (click)="cancelEdit(task)">CANCEL</button>
         </div>
@@ -64,10 +65,10 @@
         <div *ngIf="!task.isEditing">
           {{ task.name }}
           <div class="date-delete">
-            <p>{{ finalString }}</p>
+            <p *ngIf="task.dueDate">Due Date: {{ task.dueDate | date }}</p>
             <div class="edit-delete">
-             <button (click)="editTask(task)" class="edit">EDIT</button>
-             <button (click)="deleteTask(inProgress, i)" class="delete">DELETE</button>
+              <button (click)="editTask(task)" class="edit">EDIT</button>
+              <button (click)="deleteTask(inProgress, i)" class="delete">DELETE</button>
             </div>
           </div>
         </div>
@@ -75,6 +76,7 @@
         <!-- Edit mode with textarea -->
         <div *ngIf="task.isEditing">
           <textarea [(ngModel)]="task.name" placeholder="Edit task" rows="2" (input)="adjustTextareaHeight($event)"></textarea>
+          <input [(ngModel)]="task.dueDate" type="date" placeholder="Due date" />
           <button (click)="saveTask(task, task.name)">SAVE</button>
           <button (click)="cancelEdit(task)">CANCEL</button>
         </div>
@@ -101,10 +103,10 @@
         <div *ngIf="!task.isEditing">
           {{ task.name }}
           <div class="date-delete">
-            <p>{{ finalString }}</p>
+            <p *ngIf="task.dueDate">Due Date: {{ task.dueDate | date }}</p>
             <div class="edit-delete">
-             <button (click)="editTask(task)" class="edit">EDIT</button>
-             <button (click)="deleteTask(done, i)" class="delete">DELETE</button>
+              <button (click)="editTask(task)" class="edit">EDIT</button>
+              <button (click)="deleteTask(done, i)" class="delete">DELETE</button>
             </div>
           </div>
         </div>
@@ -112,11 +114,11 @@
         <!-- Edit mode with textarea -->
         <div *ngIf="task.isEditing">
           <textarea [(ngModel)]="task.name" placeholder="Edit task" rows="2" (input)="adjustTextareaHeight($event)"></textarea>
+          <input [(ngModel)]="task.dueDate" type="date" placeholder="Due date" />
           <button (click)="saveTask(task, task.name)">SAVE</button>
           <button (click)="cancelEdit(task)">CANCEL</button>
         </div>
       </div>
     </div>
   </div>
-
 </div>

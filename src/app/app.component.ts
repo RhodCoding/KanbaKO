@@ -16,18 +16,14 @@ import {
   imports: [CommonModule, FormsModule, DragDropModule],
 })
 export class AppComponent {
-  todo: { name: string; isEditing: boolean }[] = [];
-  inProgress: { name: string; isEditing: boolean }[] = [];
-  done: { name: string; isEditing: boolean }[] = [];
-  newTask: string = '';
-  finalString: string;
+  todo: { name: string; isEditing: boolean; priority: string; dueDate: string | null }[] = [];
+  inProgress: { name: string; isEditing: boolean; priority: string; dueDate: string | null }[] = [];
+  done: { name: string; isEditing: boolean; priority: string; dueDate: string | null }[] = [];
+  newTask: { name: string; priority: string; dueDate: string | null } = { name: '', priority: 'low', dueDate: null };
 
-  constructor() {
-    let currentDate = new Date();
-    this.finalString = currentDate.toLocaleDateString();
-  }
+  constructor() {}
 
-  drop(event: CdkDragDrop<{ name: string; isEditing: boolean }[]>) {
+  drop(event: CdkDragDrop<{ name: string; isEditing: boolean; priority: string; dueDate: string | null }[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -42,30 +38,35 @@ export class AppComponent {
 
   // Adds a new task to the "To do" list
   addTask() {
-    if (this.newTask.trim()) {
-      this.todo.push({ name: this.newTask.trim(), isEditing: false });
-      this.newTask = '';
+    if (this.newTask.name.trim()) {
+      this.todo.push({
+        name: this.newTask.name.trim(),
+        isEditing: false,
+        priority: this.newTask.priority,
+        dueDate: this.newTask.dueDate,
+      });
+      this.newTask = { name: '', priority: 'low', dueDate: null }; // Reset the new task
     }
   }
 
   // Deletes a task from a list based on the index
-  deleteTask(list: { name: string; isEditing: boolean }[], index: number) {
+  deleteTask(list: { name: string; isEditing: boolean; priority: string; dueDate: string | null }[], index: number) {
     list.splice(index, 1);
   }
 
   // Starts editing a task
-  editTask(task: { name: string; isEditing: boolean }) {
+  editTask(task: { name: string; isEditing: boolean; priority: string; dueDate: string | null }) {
     task.isEditing = true;
   }
 
   // Saves the edited task
-  saveTask(task: { name: string; isEditing: boolean }, newTaskName: string) {
+  saveTask(task: { name: string; isEditing: boolean; priority: string; dueDate: string | null }, newTaskName: string) {
     task.name = newTaskName;
     task.isEditing = false;
   }
 
   // Cancels editing
-  cancelEdit(task: { name: string; isEditing: boolean }) {
+  cancelEdit(task: { name: string; isEditing: boolean; priority: string; dueDate: string | null }) {
     task.isEditing = false;
   }
 
